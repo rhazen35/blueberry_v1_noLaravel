@@ -6,7 +6,7 @@
  * Time: 11:47
  */
 
-namespace classes\header;
+namespace app\classes\header;
 
 if( !class_exists( "Header" ) ):
 
@@ -22,13 +22,7 @@ if( !class_exists( "Header" ) ):
 
         public function request()
         {
-            switch( $this->header ):
-
-                case"standard":
-                    return( $this->standardHeader() );
-                    break;
-
-            endswitch;
+            echo'asdadadasdasd';
         }
 
         private function standardHeader()

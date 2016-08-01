@@ -6,4 +6,13 @@
  * Time: 11:11
  */
 
-require $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "blueberry" . DIRECTORY_SEPARATOR . "app" . DIRECTORY_SEPARATOR . "init" . DIRECTORY_SEPARATOR . "init.php";
+namespace web\index;
+
+$path = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR."blueberry".DIRECTORY_SEPARATOR."app".DIRECTORY_SEPARATOR."bootstrap".DIRECTORY_SEPARATOR."bootstrap.php";
+require $path;
+
+use app\classes\header\Header;
+
+( new Header( "standard" ) )->request();
+
+
