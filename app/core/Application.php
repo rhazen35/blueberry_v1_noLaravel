@@ -3,6 +3,7 @@
 namespace app\core;
 
 use app\core\Library as Lib;
+use app\core\Router;
 
 if( !class_exists( "Application" ) ):
 
@@ -14,7 +15,7 @@ if( !class_exists( "Application" ) ):
             if( $_SERVER['REQUEST_METHOD'] === "POST"):
                 require( $this->loadHandler() );
             else:
-                require( $this->loadApp() );
+                return( $this->loadApp() );
             endif;
         }
         /**
@@ -22,7 +23,7 @@ if( !class_exists( "Application" ) ):
          */
         private function loadApp()
         {
-            return( "/home" );
+            return( ( new Router( "getCurrentRoute" ) )->request( $params = null ) );
         }
         /**
          * @return string
