@@ -1,4 +1,1 @@
-<?php
-include("bootstrap.php");
-?>
-<h1>Welkom</h1>
+<?php include("bootstrap.php");
