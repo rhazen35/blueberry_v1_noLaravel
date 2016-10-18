@@ -15,6 +15,8 @@ if( !class_exists( "Application" ) ):
         public function __construct()
         {
 
+            define( "CAPSULE", serialize( $GLOBALS['capsule'] ) );
+
             $url = $this->parseUrl();
 
             if( file_exists( Lib::path('app/controllers/' . $url[0] . '.php' ) ) )

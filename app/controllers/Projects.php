@@ -17,9 +17,7 @@ if( !class_exists( "Projects" ) ):
 
         public function index()
         {
-            $this->view('common/header', []);
             $this->view('projects/index', []);
-            $this->view('common/footer', []);
         }
 
     }

@@ -1,0 +1,25 @@
+.users
+{
+
+}
+
+.users table
+{
+  margin: 0 auto;
+  width:80%;
+}
+
+.users table th
+{
+  padding:1rem;
+  padding-left:0.5rem;
+  text-align:left;
+  color:#FFFFFF;
+  background-color: $darker-grey;
+}
+
+.users table td
+{
+  padding:0.5rem;
+  border: 1px solid #000000;
+}

@@ -1,6 +1,6 @@
 $(window).load(function() {
     // Animate loader off screen
-    $(".se-pre-con").delay(200).fadeOut(400);
+    $(".se-pre-con").delay(100).fadeOut(200);
 });
 
 /* When the user clicks on the button,
@@ -22,4 +22,16 @@ window.onclick = function(event) {
             }
         }
     }
-}
+};
+
+(function() {
+
+    $('.logout').bind('mouseenter mouseleave', function () {
+        $('.logout-img').attr({
+            src: $('.logout-img').attr('data-alt-src')
+            , 'data-alt-src': $('.logout-img').attr('src')
+        })
+    });
+
+}());
+

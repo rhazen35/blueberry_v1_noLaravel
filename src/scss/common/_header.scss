@@ -24,3 +24,26 @@
   margin-left:1rem;
   color:#FFFFFF;
 }
+
+.header-logout
+{
+  float:right;
+  line-height:3rem;
+}
+
+.header-logout img
+{
+  float:left;
+  width:30px;
+  height:30px;
+}
+
+.header-logout a
+{
+  float:left;
+  display:block;
+  line-height:2.5rem;
+  margin-left:0.5rem;
+  color: $white;
+  text-decoration:none;
+}
