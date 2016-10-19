@@ -1,27 +1,6 @@
 <div class="container">
     <div class="container-title">Users</div>
+    <a href="/users/new_user">Add user</a>
 </div>
 
-<?php $users = $this->get_users(); ?>
-
-<div class="users">
-    <table>
-        <tr>
-            <th>Email</th>
-            <th>Type</th>
-            <th>Created at</th>
-            <th>Updated at</th>
-        </tr>
-        <tr>
-            <?php
-                foreach($users as $user):
-                    $user_type = $this->model('User')->get_user_type( $data = ['user_id' => $user->id] );
-                ?>
-                    <td><?= $user->email ?></td>
-                    <td><?= $user_type = $this->convert_user_type( $user_type ) ?></td>
-                    <td><?= $user->created_at ?></td>
-                    <td><?= $user->updated_at ?></td>
-            <?php endforeach; ?>
-        </tr>
-    </table>
-</div>
+<?php $this->view_partial( "users", "users_table" ); ?>

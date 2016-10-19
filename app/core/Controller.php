@@ -3,6 +3,7 @@
 namespace app\core;
 
 use app\controllers\Login;
+use app\core\Library as Lib;
 
 if( !class_exists( "Controller" ) ):
 
@@ -10,7 +11,7 @@ if( !class_exists( "Controller" ) ):
     {
         protected function model( $model )
         {
-            require_once( "app/models/" . $model . ".php" );
+            require_once( Lib::path("app/models/" . $model . ".php" ) );
             return( new $model );
         }
 
@@ -21,14 +22,19 @@ if( !class_exists( "Controller" ) ):
                 $view = "login/index";
             }
 
-            require_once( "app/views/common/header.phtml" );
-            require_once( "app/views/" . $view . ".phtml" );
-            require_once( "app/views/common/footer.phtml" );
+            require_once( Lib::path("app/views/common/header.phtml" ) );
+            require_once( Lib::path("app/views/" . $view . ".phtml" ) );
+            require_once( Lib::path("app/views/common/footer.phtml" ) );
+        }
+
+        protected function view_partial( $view, $partial )
+        {
+            require_once( Lib::path("app/views/" . $view . "/partials/" . $partial . ".phtml" ) );
         }
 
         protected function view_messages( $view, $data = [] )
         {
-            require_once( "app/views/messages/" . $view . ".phtml" );
+            require_once( Lib::path("app/views/messages/" . $view . ".phtml" ) );
         }
 
         protected function is_admin_or_super_user()
@@ -36,7 +42,7 @@ if( !class_exists( "Controller" ) ):
             if( isset( $_SESSION['login'] ) ):
                 $data = ['user_id' => $_SESSION['login']];
                 $userType = $this->model('User')->get_user_type($data);
-                if( $userType === "1" || $userType === "2" ):
+                if( $userType === 1 || $userType === 2 ):
                     return( true );
                 else:
                     return( false );

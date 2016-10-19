@@ -59,7 +59,7 @@ if( !class_exists( "Library" ) ):
         /**
          * @return string
          */
-        public static function randomPassword()
+        public static function random_password()
         {
             $alphabet    = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
             $pass        = array();
@@ -71,6 +71,16 @@ if( !class_exists( "Library" ) ):
             }
 
             return( implode( $pass ) );
+        }
+
+        public static function noempty( $params )
+        {
+            foreach($params as $arg)
+                if(!empty($arg))
+                    continue;
+                else
+                    return false;
+            return true;
         }
 
     }

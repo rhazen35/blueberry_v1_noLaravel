@@ -11,9 +11,10 @@ require_once( 'app' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'data
 require_once( 'app' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'Library.php' );
 require_once( 'app' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'Controller.php' );
 
-define('APPLICATION_PATH', realpath( Lib::path(__DIR__) ) . DIRECTORY_SEPARATOR);
+define( 'APPLICATION_PATH', realpath( Lib::path(__DIR__) ) . DIRECTORY_SEPARATOR );
 
 require_once( APPLICATION_PATH . Lib::path( 'app/core/autoloader.php' ) );
+require_once( APPLICATION_PATH . Lib::path( 'app/core/glossary.php' ) );
 
 ( new Configuration() )->initSet();
 ( new Application() );

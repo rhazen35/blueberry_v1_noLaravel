@@ -1,5 +1,6 @@
 .container
 {
+  clear: both;
   height:auto;
   background: $white;
   padding:2rem;
@@ -7,7 +8,27 @@
 
 .container-title
 {
+  float:left;
   color: $marine;
   font-weight:bold;
   font-size:110%;
 }
+
+.container a
+{
+  float:right;
+  display:block;
+  width:4rem;
+  margin-top:1rem;
+  margin-bottom:1rem;
+  padding:1rem;
+  color: $black;
+  text-decoration:none;
+  background-color: $swamp-green;
+
+  &:hover
+  {
+    background-color: $light-sky-blue;
+  }
+}
+

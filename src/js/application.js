@@ -35,3 +35,40 @@ window.onclick = function(event) {
 
 }());
 
+(function() {
+
+    var body = $('body');
+    var $tableWrapper = $('#stage-table-wrapper');
+
+    body.on('change', '#updateUser', function(e) {
+        var url = this.form.action,
+            data = $(this.form).serialize();
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            success: function(response)
+            {
+                $tableWrapper.html(response);
+            }
+        });
+
+        e.preventDefault();
+
+    });
+
+    body.on('click', '#deleteUser', function(e) {
+        e.preventDefault();
+        var url = $(this).attr('data-url');
+
+        $.get( url, function( data ) {
+            $tableWrapper.html( data );
+        });
+
+    });
+
+}());
+
+
+

@@ -8,7 +8,7 @@ if( !class_exists( "Application" ) ):
 
     class Application
     {
-        protected $controller = "Home";
+        protected $controller = "home";
         protected $method     = 'index';
         protected $params     = [];
 
