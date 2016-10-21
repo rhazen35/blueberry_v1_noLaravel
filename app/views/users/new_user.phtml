@@ -21,7 +21,7 @@ $random_pass = Lib::random_password();
                 <option value="<?= $user_type ?>"><?= $user_type ?></option>
                 <?php endforeach; ?>
             </select>
-            <div class="random">Tijdelijk wachtwoord: <?= $random_pass ?></div>
+            <div class="random">Temporary password: <?= $random_pass ?></div>
             <input type="hidden" name="password" value="<?= $random_pass ?>">
             <input type="submit" name="newUserSubmit" value="Add">
         </fieldset>
