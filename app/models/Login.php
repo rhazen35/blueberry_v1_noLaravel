@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-if( !class_exists( "Login" ) ):
+if( !class_exists( "Login", true ) ):
 
     class Login extends Eloquent
     {

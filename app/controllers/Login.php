@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 
-if( !class_exists( "Login" ) ):
+if( !class_exists( "app\\controllers\\Login", true) ):
 
     class Login extends Controller
     {

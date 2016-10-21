@@ -5,16 +5,11 @@ namespace app\controllers;
 use app\core\Controller;
 use app\core\Library as Lib;
 
-if( !class_exists( "Users" ) ):
+if( !class_exists( "app\\controllers\\Users" ) ):
 
     class Users extends Controller
     {
         protected $user;
-
-        public function __construct()
-        {
-
-        }
 
         public function index()
         {

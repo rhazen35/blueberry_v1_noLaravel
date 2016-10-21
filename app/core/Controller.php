@@ -2,10 +2,10 @@
 
 namespace app\core;
 
-use app\controllers\Login;
 use app\core\Library as Lib;
+use app\controllers\Login;
 
-if( !class_exists( "Controller" ) ):
+if( !class_exists( "app\\core\\Controller" ) ):
 
     class Controller
     {

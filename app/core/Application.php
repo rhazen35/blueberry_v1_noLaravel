@@ -4,7 +4,7 @@ namespace app\core;
 
 use app\core\Library as Lib;
 
-if( !class_exists( "Application" ) ):
+if( !class_exists( "app\\core\\Application" ) ):
 
     class Application
     {
