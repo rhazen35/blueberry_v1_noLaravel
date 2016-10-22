@@ -41,7 +41,7 @@ if( !class_exists( "app\\core\\Controller" ) ):
         {
             if( isset( $_SESSION['login'] ) ):
                 $data = ['user_id' => $_SESSION['login']];
-                $userType = $this->model('User')->get_user_type($data);
+                $userType = (int) $this->model('User')->get_user_type($data);
                 if( $userType === 1 || $userType === 2 ):
                     return( true );
                 else:
