@@ -9,10 +9,12 @@ if( !class_exists( "app\\controller\\Login" ) ):
     class Login extends Controller
     {
         protected $login;
+        protected $login_user;
 
         public function __construct()
         {
             $this->login = $this->model('Login');
+            $this->login_user = $this->model('LoginUser');
         }
 
         public function index()
@@ -64,11 +66,14 @@ if( !class_exists( "app\\controller\\Login" ) ):
 
         public function register_login()
         {
-            $data = $this->login->register_login();
+            $data = $this->login_user->register_login();
 
             if( empty( $data ) ):
-                $this->login->register_new_login();
+                $this->login_user->register_new_login();
+            else:
+                $this->login_user->update_user_login( $data );
             endif;
+            $this->redirect("/home");
         }
 
         public function failed()

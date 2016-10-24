@@ -20,12 +20,12 @@ CREATE TABLE `users_type`(
 CREATE TABLE `users_login`(
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `user_id` INT(11) NOT NULL,
-  `previous` TIMESTAMP NOT NULL,
-  `current` TIMESTAMP NOT NULL,
-  `first` TIMESTAMP NOT NULL,
-  `count` INT(11) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
-  `updated_at` TIMESTAMP NOT NULL,
+  `previous` TIMESTAMP,
+  `current` TIMESTAMP,
+  `first` TIMESTAMP,
+  `count` INT(11),
+  `created_at` TIMESTAMP,
+  `updated_at` TIMESTAMP,
   PRIMARY KEY(id),
   FOREIGN KEY(user_id) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
