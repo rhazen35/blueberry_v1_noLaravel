@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\core\Controller;
 
-if( !class_exists( "app\\controllers\\Login", true) ):
+if( !class_exists( "app\\controller\\Login" ) ):
 
     class Login extends Controller
     {
@@ -20,7 +20,7 @@ if( !class_exists( "app\\controllers\\Login", true) ):
             $this->view('home/index', []);
         }
 
-        public function is_logged_in()
+        public static function is_logged_in()
         {
             return( isset( $_SESSION['login'] ) && !empty( $_SESSION['login'] ) ? true : false );
         }
@@ -36,7 +36,8 @@ if( !class_exists( "app\\controllers\\Login", true) ):
                     foreach( $data as $item ):
                         $_SESSION['login'] = $item->id;
                     endforeach;
-                    $this->redirect("/home");
+                    $this->register_login();
+                    //$this->redirect("/home");
                 else:
                     $this->redirect("/login/failed");
                 endif;
@@ -58,6 +59,15 @@ if( !class_exists( "app\\controllers\\Login", true) ):
                 endforeach;
             else:
                 return( false );
+            endif;
+        }
+
+        public function register_login()
+        {
+            $data = $this->login->register_login();
+
+            if( empty( $data ) ):
+                $this->login->register_new_login();
             endif;
         }
 

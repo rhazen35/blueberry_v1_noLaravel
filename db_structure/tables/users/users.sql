@@ -16,3 +16,16 @@ CREATE TABLE `users_type`(
   PRIMARY KEY(id),
   FOREIGN KEY(user_id) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `users_login`(
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `user_id` INT(11) NOT NULL,
+  `previous` TIMESTAMP NOT NULL,
+  `current` TIMESTAMP NOT NULL,
+  `first` TIMESTAMP NOT NULL,
+  `count` INT(11) NOT NULL,
+  `created_at` TIMESTAMP NOT NULL,
+  `updated_at` TIMESTAMP NOT NULL,
+  PRIMARY KEY(id),
+  FOREIGN KEY(user_id) REFERENCES users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

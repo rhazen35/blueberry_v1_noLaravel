@@ -5,7 +5,7 @@ namespace app\core;
 use app\core\Library as Lib;
 use app\controllers\Login;
 
-if( !class_exists( "app\\core\\Controller" ) ):
+if( !class_exists( "Controller" ) ):
 
     class Controller
     {
@@ -17,7 +17,7 @@ if( !class_exists( "app\\core\\Controller" ) ):
 
         protected function view( $view, $data = [] )
         {
-            if( !( new Login() )->is_logged_in() )
+            if( ! Login::is_logged_in() )
             {
                 $view = "login/index";
             }

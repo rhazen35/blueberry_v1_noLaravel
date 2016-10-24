@@ -38,10 +38,11 @@ if( !class_exists( "User" ) ):
         public function create_user( $data = [] )
         {
             $capsule = unserialize( CAPSULE );
-            $hash         = password_hash( $data['pass'], PASSWORD_BCRYPT );
+            $hash    = password_hash( $data['pass'], PASSWORD_BCRYPT );
             $dataSet = array('email' => $data['email'], 'hash' => $hash);
-            $user = User::create($dataSet);
-            $userID = $user->id;
+            $user    = User::create($dataSet);
+            $userID  = $user->id;
+
             $capsule->table('users_type')->insert(['user_id' => $userID, 'type' => $data['type']]);
         }
 
