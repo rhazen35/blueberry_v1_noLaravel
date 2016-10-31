@@ -9,12 +9,16 @@ if( !class_exists( "Projects" ) ):
     class Projects extends Controller
     {
         protected $project;
+        protected $settings;
         protected $configuration;
+        protected $configuration_mapper;
 
         public function __construct()
         {
-            $this->project       = $this->model("Project");
-            $this->configuration = $this->model("ProjectConfiguration");
+            $this->project              = $this->model("Project");
+            $this->settings             = $this->model("ProjectSettings");
+            $this->configuration        = $this->model("ProjectConfiguration");
+            $this->configuration_mapper = $this->model("ProjectConfigurationMapper");
         }
 
         public function index( $data = [] )
@@ -29,7 +33,8 @@ if( !class_exists( "Projects" ) ):
 
         public function new_configuration( $data = [] )
         {
-            $this->configuration->new_configuration( $data );
+            $map = $this->configuration_mapper->create_map( $data );
+            $this->configuration->new_configuration( $data, $map );
         }
 
         public function get_all_projects_public()

@@ -14,7 +14,6 @@ if( !class_exists( "ProjectSettings" ) ):
         public function __construct()
         {
             parent::__construct();
-            $this->belongsTo('app\models\ProjectSettings');
             $this->capsule = unserialize( CAPSULE );
             $this->userID  = Lib::get_current_user_id();
         }

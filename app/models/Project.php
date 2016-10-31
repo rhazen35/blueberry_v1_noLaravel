@@ -1,7 +1,5 @@
 <?php
 
-namespace app\models;
-
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use app\core\Library as Lib;
 
@@ -17,10 +15,8 @@ if( !class_exists( "Project" ) ):
         public function __construct()
         {
             parent::__construct();
-            $this->belongsTo('app\models\Project');
             $this->capsule = unserialize( CAPSULE );
             $this->userID  = Lib::get_current_user_id();
-            $this->project_settings = new ProjectSettings();
         }
 
         public function get_all_projects_public()
