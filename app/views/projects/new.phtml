@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="container-title">New project</div>
+    <div class="container-menu">
+        <a href="" onclick="goBack()">Go back</a>
+        <span>Create a new project</span>
+    </div>
+</div>
+
+<div class="login">
+    <form action="<?= BASE_PATH ?>projects/add" method="post">
+        <fieldset>
+            <legend>Please fill in the form</legend>
+            <input type="text" name="name" value="" placeholder="Project name">
+            <input type="text" name="description" value="" placeholder="Project description">
+
+            <div class="radio-box">
+                <input type="radio" name="status" value="1"> Private
+                <input type="radio" name="status" value="2"> Public
+            </div>
+
+            <input type="submit" name="newProjectSubmit" value="Add project">
+        </fieldset>
+    </form>
+</div>

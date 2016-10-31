@@ -1,0 +1,37 @@
+.projects
+{
+
+}
+
+.projects table
+{
+  width:100%;
+  height:auto;
+  border-collapse: collapse;
+}
+
+.projects table tr:nth-child(even)
+{
+  background-color: $white;
+}
+
+.projects table tr:nth-child(odd)
+{
+  background-color: $light-grey;
+}
+
+.projects table th
+{
+  padding: 1rem;
+  padding-left:0.25rem;
+  text-align:left;
+  font-size:90%;
+  color: $white;
+  background-color: $dark-grey;
+}
+
+.projects table td
+{
+  padding:0.25rem;
+  font-size:80%;
+}

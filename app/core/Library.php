@@ -20,6 +20,18 @@ if( !class_exists( "Library" ) ):
         {
             return str_replace( $sDelimiter, $sReplacementDelimiter, $sPath );
         }
+
+        public static function get_current_user_id()
+        {
+            return( !empty( $_SESSION['login'] ) ? $_SESSION['login'] : "" );
+        }
+
+        public static function redirect( $location = '' )
+        {
+            header("Location: " . BASE_PATH . $location . "");
+            exit();
+        }
+
         /**
          * @param $data
          * @return string
@@ -81,6 +93,37 @@ if( !class_exists( "Library" ) ):
                 else
                     return false;
             return true;
+        }
+
+        public static function selectedIf( $expression )
+        {
+            return $expression ? 'selected' : '';
+        }
+
+        public static function ifNotEmptyDate( $date )
+        {
+            return $date !== '0000-00-00' ? $date : '';
+        }
+
+        public static function hashSpecialChars( $string )
+        {
+            return( preg_match( '/[\'^£$%&*()}{@#~?><>,|=_+¬]/', trim( $string ) ) ? true : false );
+        }
+
+        public static function isValidEmail( $email )
+        {
+            return( filter_var( trim( $email ), FILTER_VALIDATE_EMAIL ) );
+        }
+
+        public static function stringHasNumbers( $string )
+        {
+            return( preg_match('#[0-9]#',trim( $string ) ) ? true : false );
+        }
+
+        public static function containsOnlyDigits( $string )
+        {
+            $string = str_replace( " ", "", $string );
+            return( ctype_digit( $string ) );
         }
 
     }

@@ -3,32 +3,42 @@
   clear: both;
   height:auto;
   background: $white;
-  padding:2rem;
+  overflow: hidden;
+  border-bottom: 1px solid $marine;
 }
 
 .container-title
 {
   float:left;
+  padding: 0.5rem;
+  padding-right:1rem;
   color: $marine;
   font-weight:bold;
-  font-size:110%;
+  font-size:80%;
+  border-right: 1px solid $marine;
 }
 
-.container a
+.container-menu
 {
-  float:right;
-  display:block;
-  width:4rem;
-  margin-top:1rem;
-  margin-bottom:1rem;
-  padding:1rem;
-  color: $black;
-  text-decoration:none;
-  background-color: $swamp-green;
+  float:left;
+  display:flex;
+  flex-flow: row;
+  justify-content: flex-start;
+}
 
-  &:hover
-  {
-    background-color: $light-sky-blue;
-  }
+.container-menu a,
+.container-menu span
+{
+  width:auto;
+  padding:0.5rem;
+  color: $black;
+  font-size:80%;
+  text-decoration:none;
+  border-right: 1px solid $marine;
+}
+
+.container a:hover
+{
+  background-color: $light-sky-blue;
 }
 

@@ -1,6 +1,9 @@
 <?php
-/**
- * Defines all basic application constants
- */
-define( 'CSS_PATH', DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'style.min.css' );
-define( 'BASE_PATH', DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR );
+/** Set the root directory */
+define('ROOT_DIRECTORY', 'blueberry');
+
+/** Set css, base and public path */
+define( 'CSS_PATH', '/' . ROOT_DIRECTORY . '/public/css/' . 'style.min.css' );
+define( 'BASE_PATH', '/' . ROOT_DIRECTORY . '/' );
+define( 'PUBLIC_PATH', '/' . ROOT_DIRECTORY . '/public/' );
+define( 'FILE_PATH', $_SERVER['DOCUMENT_ROOT'] . PUBLIC_PATH . '/' );

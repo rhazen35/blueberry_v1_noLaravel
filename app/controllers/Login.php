@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\core\Controller;
+use app\core\Library as Lib;
 
 if( !class_exists( "app\\controller\\Login" ) ):
 
@@ -39,9 +40,9 @@ if( !class_exists( "app\\controller\\Login" ) ):
                         $_SESSION['login'] = $item->id;
                     endforeach;
                     $this->register_login();
-                    //$this->redirect("/home");
+                    Lib::redirect("home/index");
                 else:
-                    $this->redirect("/login/failed");
+                    Lib::redirect("login/failed");
                 endif;
             else:
                 return( false );
@@ -73,7 +74,7 @@ if( !class_exists( "app\\controller\\Login" ) ):
             else:
                 $this->login_user->update_user_login( $data );
             endif;
-            $this->redirect("/home");
+            Lib::redirect("home/index");
         }
 
         public function failed()
@@ -85,7 +86,7 @@ if( !class_exists( "app\\controller\\Login" ) ):
         public function logout()
         {
             unset( $_SESSION['login'] );
-            $this->redirect("/home");
+            Lib::redirect("home/index");
         }
 
     }

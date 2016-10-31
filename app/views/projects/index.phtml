@@ -1,3 +1,47 @@
+<?php $projects = $this->get_all_projects_public(); ?>
+
 <div class="container">
     <div class="container-title">Projects</div>
+    <div class="container-menu">
+        <a href="" onclick="goBack()">Ga terug</a>
+        <a href="<?= BASE_PATH; ?>projects/new">Project toevoegen</a>
+    </div>
+</div>
+
+<div class="projects">
+    <table>
+        <tr>
+            <th>Project</th>
+            <th>Description</th>
+            <th>Model</th>
+            <th>Calculator</th>
+            <th>Info</th>
+            <th>Created</th>
+            <th>Controls</th>
+        </tr>
+        <?php foreach( $projects as $project ): ?>
+            <tr>
+                <td><?= $project->name ?></td>
+                <td><?= $project->description ?></td>
+                <td>No</td>
+                <td>No</td>
+                <td>my project | new</td>
+                <td><?= $project->created_at ?></td>
+                <td>
+                    <a href="<?= BASE_PATH ?>projects/settings">settings</a>
+                    <a href="<?= BASE_PATH ?>projects/index/<?= $project->id ?>">configurations</a>
+                    <a href="<?= BASE_PATH ?>projects/edit">edit</a>
+                </td>
+            </tr>
+            <?php if( !empty( $data ) && (int) $data === $project->id ): ?>
+                <tr>
+                    <td>
+                        <div class="configurations">
+                            <a href="<?= BASE_PATH ?>projects/new-configuration/<?= $project->id ?>">new configuration</a>
+                        </div>
+                    </td>
+                </tr>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </table>
 </div>

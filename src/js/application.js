@@ -3,6 +3,11 @@ $(window).load(function() {
     $(".se-pre-con").delay(100).fadeOut(200);
 });
 
+function goBack()
+{
+    window.history.go(-1);
+}
+
 /* When the user clicks on the button,
  toggle between hiding and showing the dropdown content */
 function menuDropDown() {

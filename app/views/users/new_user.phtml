@@ -11,7 +11,7 @@ $random_pass = Lib::random_password();
 </div>
 
 <div class="new-user">
-    <form action="/users/add_user" method="post">
+    <form action="<?= BASE_PATH ?>users/add_user" method="post">
         <fieldset>
             <legend>Enter an email and type</legend>
             <input type="email" name="email" value="" placeholder="Email">

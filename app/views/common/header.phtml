@@ -21,7 +21,7 @@
 <div class="se-pre-con">
     <div class="se-pre-con-txt">
             <span>
-                <img src="<?= BASE_PATH . 'img/icons/gears.gif?'. uniqid() ?>">
+                <img src="<?= PUBLIC_PATH . 'img/icons/gears.gif?'. uniqid() ?>">
                 <br>
                 Loading, please wait...
             </span>
@@ -33,21 +33,21 @@
     <div class="header-navigation dropdown">
         <button onclick="menuDropDown()" class="dropbtn"></button>
         <div id="myDropdown" class="dropdown-content">
-            <a href="/home">Home</a>
-            <a href="/projects">Projects</a>
-            <a href="/manual">Manual</a>
+            <a href="<?= BASE_PATH ?>home/index">Home</a>
+            <a href="<?= BASE_PATH ?>projects/index">Projects</a>
+            <a href="<?= BASE_PATH ?>manual/index">Manual</a>
             <?php if( $this->is_admin_or_super_user() ): ?>
-                <a href="/users">Users</a>
+                <a href="<?= BASE_PATH ?>users/index">Users</a>
             <?php endif; ?>
-            <a href="/contact">Contact</a>
+            <a href="<?= BASE_PATH ?>contact/index">Contact</a>
         </div>
     </div>
     <?php endif; ?>
     <div class="header-title">Blueberry</div>
     <?php if( !empty( $_SESSION['login'] ) ): ?>
     <div class="header-logout">
-        <img class="logout-img" data-alt-src="<?= BASE_PATH . 'img/icons/lock_icon_closed.png'?>" src="../public/img/icons/lock_icon_open.png">
-        <a class="logout" href="/login/logout" title="Click to logout">Logout</a>
+        <img class="logout-img" data-alt-src="<?= PUBLIC_PATH . 'img/icons/lock_icon_closed.png'?>" src="<?= PUBLIC_PATH ?>img/icons/lock_icon_open.png">
+        <a class="logout" href="<?= BASE_PATH ?>login/logout" title="Click to logout">Logout</a>
     </div>
     <?php endif; ?>
 </div>

@@ -9,7 +9,7 @@ if( !class_exists( "Controller" ) ):
 
     class Controller
     {
-        protected function model( $model )
+        public function model( $model )
         {
             require_once( Lib::path("app/models/" . $model . ".php" ) );
             return( new $model );

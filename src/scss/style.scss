@@ -1,13 +1,18 @@
 @import
 'reset'
+// Common
 , "common/colors"
 , "common/header"
 , "common/container"
 , "common/dropDownNav"
 , "common/blocks"
 , "common/login"
+// Users
 , "users/users"
 , "users/newUser"
+// Projects
+, "projects/projects"
+
 ;
 *
 {

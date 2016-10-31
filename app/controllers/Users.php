@@ -36,7 +36,7 @@ if( !class_exists( "app\\controllers\\Users" ) ):
 
             if( Lib::noempty( $params = array($email, $this->convert_user_type_number( $type ), $pass ) ) ):
                 $this->model('User')->create_user( ['email' => $email, 'type' => $type, 'pass' => $pass] );
-                $this->redirect("/users");
+                Lib::redirect("users/index");
             endif;
 
         }
