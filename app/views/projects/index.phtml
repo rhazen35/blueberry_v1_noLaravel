@@ -17,7 +17,7 @@
             <th>Calculator</th>
             <th>Info</th>
             <th>Created</th>
-            <th>Controls</th>
+            <th></th>
         </tr>
         <?php foreach( $projects as $project ): ?>
             <tr>
@@ -33,11 +33,45 @@
                     <a href="<?= BASE_PATH ?>projects/edit">edit</a>
                 </td>
             </tr>
-            <?php if( !empty( $data ) && (int) $data === $project->id ): ?>
+            <?php if( !empty( $data ) && (int) $data === $project->id ): $configurations = $this->get_project_configurations( $project->id ); ?>
                 <tr>
-                    <td>
+                    <td colspan="7">
                         <div class="configurations">
+                            <p>
+                                Showing configuration(s) for project <?= $project->name ?>
+                            </p>
+                            <a href="<?= BASE_PATH ?>projects/index">close</a>
                             <a href="<?= BASE_PATH ?>projects/new-configuration/<?= $project->id ?>">new configuration</a>
+                            <?php if( !empty( $configurations ) ): ?>
+                                <table>
+                                    <tr>
+                                        <th>Configuration number</th>
+                                        <th>Version</th>
+                                        <th>Branch</th>
+                                        <th>End user</th>
+                                        <th>Created</th>
+                                        <th></th>
+                                    </tr>
+                                    <?php foreach( $configurations as $configuration ): ?>
+                                    <tr>
+                                        <td><?= $configuration['hash'] ?></td>
+                                        <td><?= $configuration['version'] ?></td>
+                                        <td><?= $configuration['branch'] ?></td>
+                                        <td><?= $configuration['end_user_type'] ?></td>
+                                        <td><?= $configuration['created_at'] ?></td>
+                                        <td>
+                                            <a href="<?= BASE_PATH ?>configurations/edit/<?= $configuration['id'] ?>">edit</a>
+                                            <a href="<?= BASE_PATH ?>configurations/test/<?= $configuration['id'] ?>">test</a>
+                                            <a href="<?= BASE_PATH ?>configurations/settings/<?= $configuration['id'] ?>">settings</a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </table>
+                            <?php else: ?>
+                                <div class="configurations-empty">
+                                    No configrations found, please create a new one.
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </td>
                 </tr>

@@ -46,8 +46,8 @@ if( !class_exists( "Project" ) ):
                     ]);
 
                     /** Create a directory for the documents and the projects */
-                    $documents = FILE_PATH . 'documents';
-                    $projects  = FILE_PATH . 'documents/projects';
+                    $documents = Lib::path( FILE_PATH . 'documents' );
+                    $projects  = Lib::path( FILE_PATH . 'documents/projects' );
 
                     if( !file_exists( $documents ) ): mkdir($documents, 0777, true); endif;
                     if( !file_exists( $projects ) ): mkdir($projects, 0777, true); endif;

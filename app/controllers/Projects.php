@@ -42,6 +42,11 @@ if( !class_exists( "Projects" ) ):
             return( $this->project->get_all_projects_public() );
         }
 
+        public function get_project_configurations( $data = [] )
+        {
+            return( $this->configuration_mapper->create_map( $data ) );
+        }
+
         public function add()
         {
             $this->project->add( $_POST );

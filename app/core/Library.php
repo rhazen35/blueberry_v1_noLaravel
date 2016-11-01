@@ -16,7 +16,7 @@ if( !class_exists( "Library" ) ):
          * @param string $sReplacementDelimiter
          * @return mixed
          */
-        public static function path($sPath, $sDelimiter = '/', $sReplacementDelimiter = DIRECTORY_SEPARATOR )
+        public static function path( $sPath, $sDelimiter = '/', $sReplacementDelimiter = DIRECTORY_SEPARATOR )
         {
             return str_replace( $sDelimiter, $sReplacementDelimiter, $sPath );
         }

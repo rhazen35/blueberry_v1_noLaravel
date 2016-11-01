@@ -1,0 +1,37 @@
+.configurations
+{
+  width:100%;
+}
+
+.configurations p
+{
+
+}
+
+.configurations table
+{
+  width:90%;
+  margin: 0 auto;
+  margin-top:1rem;
+  margin-bottom:1rem;
+}
+
+.configurations table tr
+{
+  background-color: $light-grey;
+}
+
+.configurations table th
+{
+  padding: 1rem;
+  padding-left:0.5rem;
+  text-align:left;
+  font-size:90%;
+  color: $white;
+  background-color: $marine;
+}
+
+.configurations table td
+{
+  font-size:100%;
+}
