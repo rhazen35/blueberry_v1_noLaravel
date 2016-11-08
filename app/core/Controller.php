@@ -23,7 +23,11 @@ if( !class_exists( "Controller" ) ):
             }
 
             require_once( Lib::path("app/views/common/header.phtml" ) );
-            require_once( Lib::path("app/views/" . $view . ".phtml" ) );
+            if( file_exists( Lib::path("app/views/" . $view . ".phtml" ) ) ):
+                require_once( Lib::path("app/views/" . $view . ".phtml" ) );
+            else:
+                require_once( Lib::path("app/views/common/404.phtml" ) );
+            endif;
             require_once( Lib::path("app/views/common/footer.phtml" ) );
         }
 

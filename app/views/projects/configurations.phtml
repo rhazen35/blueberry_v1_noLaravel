@@ -1,0 +1,55 @@
+<?php
+    $projectID = '';
+
+    if( !empty( $data ) ):
+        $projectID = $data;
+        $configurations = $this->get_project_configurations( $projectID );
+    endif;
+?>
+
+<div class="container">
+    <div class="container-title">Projects configurations</div>
+    <div class="container-menu">
+        <a href="" onclick="goBack()">Ga terug</a>
+        <a href="<?= BASE_PATH; ?>projects/index">Projects</a>
+        <a href="<?= BASE_PATH; ?>projects/new">Project toevoegen</a>
+        <a href="<?= BASE_PATH ?>projects/new-configuration/<?= $projectID ?>">new configuration</a>
+    </div>
+</div>
+
+<?php if( !empty( $projectID ) && !empty( $configurations ) ): ?>
+
+    <div class="projects">
+        <table>
+            <tr>
+                <th>Configuration number</th>
+                <th>Version</th>
+                <th>Branch</th>
+                <th>End user</th>
+                <th>Created</th>
+                <th></th>
+            </tr>
+
+            <?php foreach( $configurations as $configuration ): ?>
+                <tr>
+                    <td><span><?= $configuration['hash'] ?></span></td>
+                    <td><span><?= $configuration['version'] ?></span></td>
+                    <td><span><?= $configuration['branch'] ?></span></td>
+                    <td><span><?= $configuration['end_user_type'] ?></span></td>
+                    <td><span><?= $configuration['created_at'] ?></span></td>
+                    <td>
+                        <span><a href="<?= BASE_PATH ?>configurations/edit/<?= $configuration['id'] ?>">edit</a></span>
+                        <span><a href="<?= BASE_PATH ?>configurations/test/<?= $configuration['id'] ?>">test</a></span>
+                        <span><a href="<?= BASE_PATH ?>configurations/settings/<?= $configuration['id'] ?>">settings</a></span>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+
+        </table>
+    </div>
+
+<?php elseif( empty( $projectID ) ): ?>
+    <div class="display-message">Kon het project niet vinden, selecteer een ander project.</div>
+<?php elseif( empty( $configurations ) ): ?>
+    <div class="display-message">Dit project heeft nog geen configuraties, maak een nieuwe aan boven aan de pagina.</div>
+<?php endif; ?>

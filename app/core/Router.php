@@ -6,7 +6,7 @@ use app\core\Library as Lib;
 
 if( !class_exists( "Router" ) ):
 
-    class Router
+    class Router extends Controller
     {
         protected $url;
         protected $routes;
@@ -68,41 +68,36 @@ if( !class_exists( "Router" ) ):
 
             /** Check if the route exists */
             if( !$route_exist ):
-                echo "Route does not exist.";
-                echo "<br>";
-                echo "Route: " . $route;
+                $this->view('common/404', []);
+                exit();
             endif;
 
             /** Check if the controller exists */
             if( file_exists( Lib::path('app/controllers/' . $this->controller . '.php' ) ) ):
                 require_once( Lib::path( 'app/controllers/' . $this->controller . '.php' ) );
                 unset($url[0]);
+
+                /** Capitalize first letter of controller and set controller namespace */
+                $cp_controller = ucfirst( $this->controller );
+                $ns_controller = "\\app\\controllers\\".$cp_controller;
+
+                $this->controller = ( new $ns_controller );
+
+                /** Check if the method exists */
+                if( method_exists( $this->controller, $this->method ) ):
+                    unset( $url[1] );
+                else:
+                    $this->view('common/404', []);
+                    exit();
+                endif;
+
+                $this->params = $url ? array_values( $url ) : [];
+
+                call_user_func_array( [ $this->controller, $this->method ], $this->params );
             else:
-                echo "Controller does not exist.";
-                echo "<br>";
-                echo "Controller: " . $this->controller;
-                $this->controller = $this->default_controller; /** Fallback to default controller */
+                $this->view('common/404', []);
+                exit();
             endif;
-
-            /** Capitalize first letter of controller and set controller namespace */
-            $cp_controller = ucfirst( $this->controller );
-            $ns_controller = "\\app\\controllers\\".$cp_controller;
-
-            $this->controller = ( new $ns_controller );
-
-            /** Check if the method exists */
-            if( method_exists( $this->controller, $this->method ) ):
-                unset( $url[1] );
-            else:
-                echo "Method does not exist.";
-                echo "<br>";
-                echo "Method: " . $this->method;
-                $this->method = $this->default_method; /** Fallback to default method */
-            endif;
-
-            $this->params = $url ? array_values( $url ) : [];
-
-            call_user_func_array( [ $this->controller, $this->method ], $this->params );
         }
     }
 

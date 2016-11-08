@@ -29,9 +29,29 @@ if( !class_exists( "ProjectConfiguration" ) ):
             return( $this->capsule->table('project_configuration_version')->where('project_id', '=', $data)->get() );
         }
 
-        public function new_configuration( $data, $map )
+        public function new_configuration( $data )
         {
-            var_dump($map);
+            $projectID        = ( isset( $data ) ? $data : "" );
+            $version          = "0.0.0.1";
+            $branch           = "master";
+            $end_user_type    = 1;
+            $hash             = "";
+
+            $configuration_id = $this->capsule->table('project_configuration')->insertGetId([
+                "user_id"       => $this->userID,
+                "project_id"    => $projectID,
+                "hash"          => $hash,
+                "end_user_type" => $end_user_type,
+            ]);
+
+            $this->capsule->table('project_configuration_version')->insert([
+                "user_id"          => $this->userID,
+                "project_id"       => $projectID,
+                "configuration_id" => $configuration_id,
+                "version"          => $version,
+                "branch"           => $branch
+            ]);
+
         }
     }
 

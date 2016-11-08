@@ -25,6 +25,7 @@
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
+  z-index: 1;
   display: none;
   position: absolute;
   background-color: #f9f9f9;

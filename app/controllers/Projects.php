@@ -31,10 +31,30 @@ if( !class_exists( "Projects" ) ):
             $this->view('projects/new', []);
         }
 
+        public function configurations( $data = [] )
+        {
+            $this->view('projects/configurations', $data);
+        }
+
+        public function project_settings()
+        {
+            $this->view('projects/settings', []);
+        }
+
+        public function get_configuration_map( $data )
+        {
+            return ( $this->configuration_mapper->create_map( $data ) );
+        }
+
         public function new_configuration( $data = [] )
         {
-            $map = $this->configuration_mapper->create_map( $data );
-            $this->configuration->new_configuration( $data, $map );
+            $map = $this->get_configuration_map( $data );
+
+            if( empty( $map ) ):
+                $this->configuration->new_configuration( $data );
+            else:
+                var_dump( $map );
+            endif;
         }
 
         public function get_all_projects_public()
