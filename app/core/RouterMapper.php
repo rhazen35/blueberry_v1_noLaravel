@@ -36,9 +36,12 @@ if( !class_exists( "RouterMapper" ) ):
                 array('url' => 'projects/index'                 , 'controller' => 'projects'        , 'action' => 'index'),
                 array('url' => 'projects/new'                   , 'controller' => 'projects'        , 'action' => 'new_project'),
                 array('url' => 'projects/add'                   , 'controller' => 'projects'        , 'action' => 'add'),
+                array('url' => 'projects/settings'              , 'controller' => 'projects'        , 'action' => 'project_settings'),
+
+                /** Configurations */
                 array('url' => 'projects/new-configuration'     , 'controller' => 'projects'        , 'action' => 'new_configuration'),
                 array('url' => 'projects/configurations'        , 'controller' => 'projects'        , 'action' => 'configurations'),
-                array('url' => 'projects/settings'              , 'controller' => 'projects'        , 'action' => 'project_settings'),
+                array('url' => 'projects/new-branch'            , 'controller' => 'projects'        , 'action' => 'new_branch'),
 
                 /** Contact */
                 array('url' => 'contact/index'                  , 'controller' => 'contact'         , 'action' => 'index')

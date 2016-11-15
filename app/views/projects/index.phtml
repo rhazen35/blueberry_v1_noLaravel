@@ -28,9 +28,8 @@
                 <td><span>my project | new</span></td>
                 <td><span><?= $project->created_at ?></span></td>
                 <td>
-                    <span><a href="<?= BASE_PATH ?>projects/settings">settings</a></span>
                     <span><a href="<?= BASE_PATH ?>projects/configurations/<?= $project->id ?>">configurations</a></span>
-                    <span><a href="<?= BASE_PATH ?>projects/edit">edit</a></span>
+                    <span><a href="<?= BASE_PATH ?>projects/settings">settings</a></span>
                 </td>
             </tr>
         <?php endforeach; ?>

@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\core\Controller;
+use app\core\Library as Lib;
 
 if( !class_exists( "Projects" ) ):
 
@@ -31,7 +32,12 @@ if( !class_exists( "Projects" ) ):
             $this->view('projects/new', []);
         }
 
-        public function configurations( $data = [] )
+        public function get_project( $data )
+        {
+            return( $this->project->get_project( $data ) );
+        }
+
+        public function configurations( $data )
         {
             $this->view('projects/configurations', $data);
         }
@@ -49,12 +55,18 @@ if( !class_exists( "Projects" ) ):
         public function new_configuration( $data = [] )
         {
             $map = $this->get_configuration_map( $data );
+            $this->configuration->new_configuration( $data, $map );
+        }
 
-            if( empty( $map ) ):
-                $this->configuration->new_configuration( $data );
-            else:
-                var_dump( $map );
-            endif;
+        public function new_branch()
+        {
+            $params = array();
+            $params['projectID']       = !empty( $_POST['projectID'] ) ? $_POST['projectID'] : "";
+            $params['configurationID'] = !empty( $_POST['configurationID'] ) ? $_POST['configurationID'] : "";
+            $params['branch']          = !empty( $_POST['branch'] ) ? $_POST['branch'] : "";
+
+            $map = $this->get_configuration_map( $params['projectID'] );
+            $this->configuration->new_branch( $params, $map );
         }
 
         public function get_all_projects_public()

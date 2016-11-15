@@ -19,6 +19,11 @@ if( !class_exists( "Project" ) ):
             $this->userID  = Lib::get_current_user_id();
         }
 
+        public function get_project( $data )
+        {
+            return( $this->capsule->table('projects')->where('id', $data)->first() );
+        }
+
         public function get_all_projects_public()
         {
             $type = 2;

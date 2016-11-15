@@ -1,14 +1,12 @@
 <?php
-    $projectID = '';
-
-    if( !empty( $data ) ):
-        $projectID = $data;
-        $configurations = $this->get_project_configurations( $projectID );
-    endif;
+    $projectID       = !empty( $data[0] ) ? $data[0] : "";
+    $configurationID = !empty( $data[1] ) ? $data[1] : "";
+    $project         = $this->get_project( $projectID );
+    $configurations  = $this->get_project_configurations( $projectID );
 ?>
 
 <div class="container">
-    <div class="container-title">Projects configurations</div>
+    <div class="container-title">Project <?= $project->name ?> configurations</div>
     <div class="container-menu">
         <a href="" onclick="goBack()">Ga terug</a>
         <a href="<?= BASE_PATH; ?>projects/index">Projects</a>
@@ -16,6 +14,22 @@
         <a href="<?= BASE_PATH ?>projects/new-configuration/<?= $projectID ?>">new configuration</a>
     </div>
 </div>
+
+<?php if( !empty( $configurationID ) ): ?>
+    <div class="branch-container">
+        <form action="<?= BASE_PATH ?>projects/new-branch" method="post">
+            <fieldset>
+                <legend>Enter a branch name</legend>
+                <input type="hidden" name="projectID" value="<?= $projectID ?>">
+                <input type="hidden" name="configurationID" value="<?= $configurationID ?>">
+                <input type="text" name="branch" value="">
+                <input type="submit" name="submit" value="add">
+            </fieldset>
+        </form>
+    </div>
+<?php endif; ?>
+
+
 
 <?php if( !empty( $projectID ) && !empty( $configurations ) ): ?>
 
@@ -38,9 +52,9 @@
                     <td><span><?= $configuration['end_user_type'] ?></span></td>
                     <td><span><?= $configuration['created_at'] ?></span></td>
                     <td>
-                        <span><a href="<?= BASE_PATH ?>configurations/edit/<?= $configuration['id'] ?>">edit</a></span>
-                        <span><a href="<?= BASE_PATH ?>configurations/test/<?= $configuration['id'] ?>">test</a></span>
-                        <span><a href="<?= BASE_PATH ?>configurations/settings/<?= $configuration['id'] ?>">settings</a></span>
+                        <span><a href="<?= BASE_PATH ?>projects/configurations/test/<?= $configuration['id'] ?>">test</a></span>
+                        <span><a href="<?= BASE_PATH ?>projects/configurations/<?= $projectID ?>/<?= $configuration['id'] ?>">branch</a></span>
+                        <span><a href="<?= BASE_PATH ?>projects/configurations/settings/<?= $configuration['id'] ?>">settings</a></span>
                     </td>
                 </tr>
             <?php endforeach; ?>
