@@ -62,9 +62,7 @@ $configuration_map = $this->get_configuration_map( $projectID );
 
             <?php
                 $sub_branches = $this->get_project_branches( $projectID );
-                foreach( $sub_branches as $sub_branch ):
-                    var_dump( $sub_branch );
-                endforeach;
+                Pconfig::sub_branches_recursive( $sub_branches, $configuration['id'] );
 
             ?>
 

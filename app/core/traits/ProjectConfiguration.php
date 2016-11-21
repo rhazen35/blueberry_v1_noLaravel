@@ -39,6 +39,18 @@ trait ProjectConfiguration
 
         return( $version );
     }
-    
+
+
+    public static function sub_branches_recursive( $branches, $parentID )
+    {
+        $data = [];
+        foreach( $branches as $branch ):
+            if( $branch->parent === $parentID ):
+                $data[] = $branch;
+            endif;
+        endforeach;
+
+        var_dump($data);
+    }
 }
 
