@@ -19,8 +19,8 @@ if( !class_exists( "ProjectConfigurationMapper" ) ):
         {
             $configurations = $this->capsule->table('project_configuration')
                                             ->join('project_configuration_version', 'project_configuration.project_id', '=', 'project_configuration_version.project_id')
-                                            ->select('project_configuration.*', 'project_configuration_version.version', 'project_configuration_version.branch')
-                                            ->groupby('project_configuration_version.version')
+                                            ->select('project_configuration.*', 'project_configuration_version.*')
+                                            ->groupby('project_configuration_version.id')
                                             ->where('project_configuration.project_id', '=', $data)
                                             ->get();
 
@@ -41,7 +41,6 @@ if( !class_exists( "ProjectConfigurationMapper" ) ):
 
             return($map);
         }
-
 
     }
 

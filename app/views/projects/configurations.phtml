@@ -1,8 +1,12 @@
 <?php
-    $projectID       = !empty( $data[0] ) ? $data[0] : "";
-    $configurationID = !empty( $data[1] ) ? $data[1] : "";
-    $project         = $this->get_project( $projectID );
-    $configurations  = $this->get_project_configurations( $projectID );
+
+use app\core\traits\ProjectConfiguration as Pconfig;
+
+$projectID         = !empty( $data[0] ) ? $data[0] : "";
+$configurationID   = !empty( $data[1] ) ? $data[1] : "";
+$project           = $this->get_project( $projectID );
+$configurations    = $this->get_project_configurations( $projectID );
+$configuration_map = $this->get_configuration_map( $projectID );
 ?>
 
 <div class="container">
@@ -33,34 +37,48 @@
 
 <?php if( !empty( $projectID ) && !empty( $configurations ) ): ?>
 
-    <div class="projects">
-        <table>
-            <tr>
-                <th>Configuration number</th>
-                <th>Version</th>
-                <th>Branch</th>
-                <th>End user</th>
-                <th>Created</th>
-                <th></th>
-            </tr>
+    <div class="configurations">
 
-            <?php foreach( $configurations as $configuration ): ?>
-                <tr>
-                    <td><span><?= $configuration['hash'] ?></span></td>
-                    <td><span><?= $configuration['version'] ?></span></td>
-                    <td><span><?= $configuration['branch'] ?></span></td>
-                    <td><span><?= $configuration['end_user_type'] ?></span></td>
-                    <td><span><?= $configuration['created_at'] ?></span></td>
-                    <td>
-                        <span><a href="<?= BASE_PATH ?>projects/configurations/test/<?= $configuration['id'] ?>">test</a></span>
-                        <span><a href="<?= BASE_PATH ?>projects/configurations/<?= $projectID ?>/<?= $configuration['id'] ?>">branch</a></span>
-                        <span><a href="<?= BASE_PATH ?>projects/configurations/settings/<?= $configuration['id'] ?>">settings</a></span>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
+        <div class="base">
+            <h1>Base</h1>
 
-        </table>
+    <?php
+        foreach( $configurations as $configuration ):
+            if( $configuration['branch'] === "master" ):
+    ?>
+            <div class="master">
+                <div class="master-branch">
+                    <?= $configuration['branch'] ?>
+                    <?= $configuration['version'] ?>
+                    <?= $configuration['end_user_type'] ?>
+                    <?= $configuration['hash'] ?>
+                    <?= $configuration['created_at'] ?>
+
+                    <a href="<?= BASE_PATH ?>projects/configurations/test/<?= $configuration['id'] ?>">test</a>
+                    <a href="<?= BASE_PATH ?>projects/configurations/<?= $projectID ?>/<?= $configuration['id'] ?>">branch</a>
+                    <a href="<?= BASE_PATH ?>projects/configurations/settings/<?= $configuration['id'] ?>">settings</a>
+
+                </div>
+
+            <?php
+                $sub_branches = $this->get_project_branches( $projectID );
+                foreach( $sub_branches as $sub_branch ):
+                    var_dump( $sub_branch );
+                endforeach;
+
+            ?>
+
+            </div>
+
+            <?php
+            endif;
+        endforeach;
+        ?>
+
+        </div>
+
     </div>
+
 
 <?php elseif( empty( $projectID ) ): ?>
     <div class="display-message">Kon het project niet vinden, selecteer een ander project.</div>

@@ -52,6 +52,16 @@ if( !class_exists( "Projects" ) ):
             return ( $this->configuration_mapper->create_map( $data ) );
         }
 
+        public function does_branch_exists( $branch )
+        {
+            return( $this->configuration->does_branch_exists( $branch ) );
+        }
+
+        public function get_project_branches( $parent )
+        {
+            return( $this->configuration->get_project_branches( $parent ) );
+        }
+
         public function new_configuration( $data = [] )
         {
             $map = $this->get_configuration_map( $data );

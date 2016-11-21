@@ -3,35 +3,40 @@
   width:100%;
 }
 
-.configurations p
+.base
 {
 
 }
 
-.configurations table
+.base h1
 {
-  width:90%;
-  margin: 0 auto;
-  margin-top:1rem;
-  margin-bottom:1rem;
+  padding:1rem;
+  font-size:110%;
+  font-weight:bold;
 }
 
-.configurations table tr
+.master
 {
-  background-color: $light-grey;
+  width:95%;
+  margin-left:1rem;
+  margin-bottom:0.5rem;
+  border-left:1px solid $black;
+  overflow:hidden;
 }
 
-.configurations table th
+.master-branch
 {
-  padding: 1rem;
-  padding-left:0.5rem;
-  text-align:left;
-  font-size:90%;
-  color: $white;
-  background-color: $marine;
+  width:auto;
+  margin-left:1rem;
 }
 
-.configurations table td
+.sub
 {
-  font-size:100%;
+  margin-left:1rem;
+}
+
+.sub-branch
+{
+  width:auto;
+  margin-left:1rem;
 }

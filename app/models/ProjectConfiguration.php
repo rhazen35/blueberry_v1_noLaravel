@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use app\core\Library as Lib;
+use app\core\traits\ProjectConfiguration as Pconfig;
 
 if( !class_exists( "ProjectConfiguration" ) ):
 
@@ -47,19 +48,7 @@ if( !class_exists( "ProjectConfiguration" ) ):
                 $version       = "0.0.0.1";
             else:
                 foreach( $map as $item ):
-                    $parts       = explode( ".", $item['version'] );
-                    $total_parts = count( $parts );
-
-                    if( $total_parts === 4 ): /** Status is validate */
-                        $version = "0.0.0." . ( $parts[3] + 1 );
-                    elseif( $total_parts === 3 ): /** Status is testing */
-                        $version = "0.0." . ( $parts[2] + 1 );
-                    elseif( $total_parts === 2 ): /** Status is acceptation */
-                        $version = "0." . ( $parts[1] + 1 );
-                    elseif( $total_parts === 1 ): /** Status is production */
-                        $version = "" . ( $parts[0] + 1 );
-                    endif;
-
+                    $version = Pconfig::update_version_number( $item['version'] );
                 endforeach;
             endif;
 
@@ -78,39 +67,68 @@ if( !class_exists( "ProjectConfiguration" ) ):
                 "branch"           => $branch
             ]);
 
-            Lib::redirect('projects/configurations/' . $data . '');
+            Lib::redirect('projects/configurations/' . $projectID . '');
 
+        }
+
+        public function does_branch_exists( $branch )
+        {
+            $get_branch = $this->capsule->table('project_configuration_version')
+                                    ->select('id')
+                                    ->where('branch', $branch)
+                                    ->first();
+            if( !empty( $get_branch ) ):
+                return( true );
+            else:
+                return( false );
+            endif;
         }
 
         public function new_branch( $params, $map )
         {
-            foreach( $map as $item ):
-                if( (int) $item['id'] === (int) $params['configurationID'] ):
-                    $hash          = $item['hash'];
-                    $end_user_type = $item['end_user_type'];
-                    $version       = $item['version'];
+            $branch_exists = $this->does_branch_exists( $params['branch'] );
 
-                    $configuration_id = $this->capsule->table('project_configuration')->insertGetId([
-                        "user_id"       => $this->userID,
-                        "project_id"    => $params['projectID'],
-                        "hash"          => $hash,
-                        "end_user_type" => $end_user_type,
-                    ]);
+            if( $branch_exists === false ):
+                foreach( $map as $item ):
+                    if( (int) $item['id'] === (int) $params['configurationID'] ):
 
-                    $this->capsule->table('project_configuration_version')->insert([
-                        "user_id"          => $this->userID,
-                        "project_id"       => $params['projectID'],
-                        "configuration_id" => $configuration_id,
-                        "version"          => $version,
-                        "branch"           => $params['branch']
-                    ]);
+                        $hash          = $item['hash'];
+                        $end_user_type = $item['end_user_type'];
+                        $branch        = $item['branch'];
+                        $version       = $item['version'];
 
-                    break;
-                endif;
-            endforeach;
+                        $configuration_id = $this->capsule->table('project_configuration')->insertGetId([
+                            "user_id"       => $this->userID,
+                            "project_id"    => $params['projectID'],
+                            "hash"          => $hash,
+                            "end_user_type" => $end_user_type,
+                        ]);
 
-            Lib::redirect('projects/configurations/' . $data . '');
+                        $this->capsule->table('project_configuration_version')->insert([
+                            "user_id"          => $this->userID,
+                            "project_id"       => $params['projectID'],
+                            "configuration_id" => $configuration_id,
+                            "version"          => Pconfig::create_version_number( $version ),
+                            "branch"           => $params['branch'],
+                            "parent"           => $params['configurationID']
+                        ]);
+                        break;
+                    endif;
+                endforeach;
+                Lib::redirect('projects/configurations/' . $params['projectID'] . '');
+            else:
+                Lib::redirect('projects/configurations/' . $params['projectID'] . '/' . $params['configurationID'] . '/branchExists');
+            endif;
 
+        }
+
+        public function get_project_branches( $projectID )
+        {
+            $branches = $this->capsule->table('project_configuration_version')
+                                        ->where('project_id', $projectID)
+                                        ->where('branch', '!=', 'master')
+                                        ->get();
+            return($branches);
         }
     }
 
